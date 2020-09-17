@@ -6,89 +6,27 @@ namespace URI_1047
     {
         static void Main(string[] args)
         {
-            int horaInicial, minutoInicial, horaFinal, minutoFinal, duracaoH, duracaoM;
+           
 
-            string [] vet = Console.ReadLine().Split(' ');
-            horaInicial = int.Parse(vet[0]);
-            minutoInicial = int.Parse(vet[1]);
-            horaFinal = int.Parse(vet[2]);
-            minutoFinal = int.Parse(vet[3]);
-                //duracao de 24h
-            if (horaInicial == horaFinal && minutoInicial == minutoFinal){
-                Console.WriteLine("O JOGO DUROU 24 HORA(S) E 0 MINUTO(S)");
-            }
-            else if (horaFinal > horaInicial && minutoFinal > minutoInicial){
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = minutoFinal - minutoInicial; 
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");              
-            }
-            else if (horaFinal > horaInicial && minutoFinal == minutoInicial){
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = 0;                 
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }
-            else if ( horaFinal == horaInicial && minutoFinal > minutoInicial){
-                duracaoH = 0;
-                duracaoM = minutoFinal - minutoInicial;    
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");           
-            }
-            else if ( horaFinal < horaInicial && minutoFinal > minutoInicial){
-                duracaoH = 24 - horaInicial + horaFinal;
-                duracaoM = minutoFinal - minutoInicial; 
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");               
-            }
-            else if (horaFinal < horaInicial && minutoFinal < minutoInicial){
-                duracaoH = 24 - horaInicial + horaFinal - 1;                
-                duracaoM = (minutoFinal + 60) - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");                 
-            }       
-            else if (horaFinal > horaInicial && minutoFinal < minutoInicial){
-                duracaoH = horaFinal - horaInicial -1;
-                duracaoM = (minutoFinal + 60) - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");  
-            }       
-            // seria horaFinal < horaInicial && minutoFinal == minutoInicial
-            else if (horaFinal < horaInicial && minutoFinal == minutoInicial){
-                duracaoH = 24 - horaInicial + horaFinal - 1;
-                duracaoM = 0;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");  
-            }  
-            else if (horaFinal == 0 && minutoFinal > minutoInicial){
-                horaFinal = 24;
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = minutoFinal - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            } 
-            else if (horaFinal == 0 && minutoFinal < minutoInicial){
-                horaFinal = 24;
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = (minutoFinal + 60) - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }
-            else if (horaFinal == 0 && minutoFinal == minutoInicial){
-                horaFinal = 24;
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = 0;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }
-            else if (horaInicial == 0 && minutoFinal > minutoInicial){
-                horaInicial = 24;
-                 duracaoH = horaFinal - horaInicial;
-                duracaoM = minutoFinal - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }
-            else if (horaInicial == 0 && minutoFinal < minutoInicial){
-                horaInicial = 24;
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = (minutoFinal + 60) - minutoInicial;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }      
-            else {
-                horaInicial = 24;
-                duracaoH = horaFinal - horaInicial;
-                duracaoM = 0;
-                Console.WriteLine("O JOGO DUROU " + duracaoH + " HORA(S) E " + duracaoM + " MINUTO(S)");
-            }     
+           string [] vet = Console.ReadLine().Split(' ');
+           int horaInicial = int.Parse(vet[0]);
+           int minutoInicial = int.Parse(vet[1]);
+           int horaFinal = int.Parse(vet[2]);
+           int minutoFinal = int.Parse(vet[3]);
+            //agora vou converter as horas iniciais e finais em minutos multiplicando por 60 para poder calcular
+           int instanteInicial = horaInicial * 60 + minutoInicial;
+           int instanteFinal =  horaFinal * 60 + minutoFinal;
+            int duracao;
+           if ( instanteInicial < instanteFinal){
+               duracao = instanteFinal - instanteInicial;               
+           }
+           else {
+               duracao = (24 * 60 - instanteInicial) + instanteFinal;
+           }
+          int duracaoHoras = duracao / 60;
+          int duracaoMinutos = duracao % 60;           
+          
+            Console.WriteLine("O JOGO DUROU " + duracaoHoras + " HORA(S) E " + duracaoMinutos + " MINUTO(S)");
         }
     }
 }
